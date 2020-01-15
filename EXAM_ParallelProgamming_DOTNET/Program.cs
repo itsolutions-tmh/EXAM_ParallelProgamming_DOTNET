@@ -5,20 +5,22 @@ namespace EXAM_ParallelProgamming_DOTNET
 {
     class Program
     {
-
-        static long min = 0;
-        static long max = 1_000_000;
+        static int min = 0;
+       // static int min = 10_000_000;
+        static int max = 2_000_000;
         static Program program = new Program();
 
         private PrimesSequential _primesSequential = new PrimesSequential();
         private PrimesParallel _primesParallel = new PrimesParallel();
+        private Test test = new Test();
         static void Main(string[] args)
         {
 
-            RunSequential();
+          //  RunSequential();
             RunParallel();
+            Test();
 
-
+            Console.WriteLine();
 
         }
 
@@ -33,6 +35,13 @@ namespace EXAM_ParallelProgamming_DOTNET
         {
             Console.Write("Time for Parallel approach: ");
             var n = program.Watch(() => program._primesParallel.GetPrimesParallel(min, max));
+            Console.WriteLine("\n" + n + " primes between " + min + " and " + max);
+        }
+
+        public static void Test ()
+        {
+            Console.Write("Time for Test approach: ");
+            var n = program.Watch(() => program.test.PrimesWithPlinq(min, max));
             Console.WriteLine("\n" + n + " primes between " + min + " and " + max);
         }
 
